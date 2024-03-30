@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { PDBLoader } from "three/addons/loaders/PDBLoader.js";
 import Experience from "./Experience.js";
-// import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export default class Chemical {
   constructor(filename, title, description, metadata) {
@@ -33,6 +33,7 @@ export default class Chemical {
       metadataBevelSize: 0.001,
     };
 
+    // title
     this.titleGeometry = new TextGeometry(title, {
       font: this.font,
       size: this.textParameters.size,
