@@ -20,9 +20,17 @@ export default class Chemical {
       depth: 0.2,
       curveSegments: 5, //lower = easier for computer
       bevelThickness: 0.03,
-      bevelSize: 0.02,
+      bevelSize: 0.015,
       bevelOffset: 0,
       bevelSegments: 3, //lower = easier for computer
+      
+      descHeight: 0.1,
+      descSize: 0.1,
+      descBevelSize: 0.001,
+
+      metadataHeight: 0.1,
+      metadataSize: 0.07,
+      metadataBevelSize: 0.001,
     };
 
     this.titleGeometry = new TextGeometry(title, {
@@ -37,13 +45,55 @@ export default class Chemical {
       bevelOffset: this.textParameters.bevelOffset,
       bevelSegments: this.textParameters.bevelSegments,
     });
-    this.textMaterial = new THREE.MeshBasicMaterial("white");
+    this.textMaterial = new THREE.MeshBasicMaterial({color: "white"});
 
     // this.textGeometry.center(); //much simpler way than commented code above
     this.titleMesh = new THREE.Mesh(this.titleGeometry, this.textMaterial);
-    this.titleMesh.scale.set(1.0, 1.0, 0.1);
-    this.titleMesh.position.set(0.0, 0.0, 0.0);
+    this.titleMesh.scale.set(1.0, 1.0, 0.3);
+    this.titleMesh.position.set(-1, 1.6, 0.5);
     this.scene.add(this.titleMesh);
+    this.offset = new THREE.Vector3();
+
+    // Description
+    this.descGeometry = new TextGeometry(description, {
+      font: this.font,
+      size: this.textParameters.descSize,
+      height: this.textParameters.descHeight,
+      
+      curveSegments: this.textParameters.curveSegments,
+      bevelEnabled: true,
+      bevelThickness: this.textParameters.bevelThickness,
+      bevelSize: this.textParameters.descBevelSize,
+      bevelOffset: this.textParameters.bevelOffset,
+      bevelSegments: this.textParameters.bevelSegments,
+    });
+    this.textMaterial = new THREE.MeshBasicMaterial({color: "blue"});
+
+    this.descMesh = new THREE.Mesh(this.descGeometry, this.textMaterial);
+    this.descMesh.scale.set(1.0, 1.0, 0.3);
+    this.descMesh.position.set(1.8, 1.5, 0.8);
+    this.scene.add(this.descMesh);
+    this.offset = new THREE.Vector3();
+
+    // Metadata
+    this.metadataGeometry = new TextGeometry(metadata, {
+      font: this.font,
+      size: this.textParameters.metadataSize,
+      height: this.textParameters.metadataHeight,
+      
+      curveSegments: this.textParameters.curveSegments,
+      bevelEnabled: true,
+      bevelThickness: this.textParameters.bevelThickness,
+      bevelSize: this.textParameters.descBevelSize,
+      bevelOffset: this.textParameters.bevelOffset,
+      bevelSegments: this.textParameters.bevelSegments,
+    });
+    this.textMaterial = new THREE.MeshBasicMaterial({color: "grey"});
+
+    this.metadataMesh = new THREE.Mesh(this.metadataGeometry, this.textMaterial);
+    this.metadataMesh.scale.set(1.0, 1.0, 0.3);
+    this.metadataMesh.position.set(-0.9, 1.3, 0.9);
+    this.scene.add(this.metadataMesh);
     this.offset = new THREE.Vector3();
 
     // this.root contains the 3D model
@@ -153,9 +203,14 @@ export default class Chemical {
   hide() {
     this.root.visible = false;
     this.titleMesh.visible = false;
+    this.descMesh.visible = false;
+    this.metadataMesh.visible = false;
+
   }
   show() {
     this.root.visible = true;
     this.titleMesh.visible = true;
+    this.descMesh.visible = true;
+    this.metadataMesh.visible = true;
   }
 }
