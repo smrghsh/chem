@@ -36,19 +36,19 @@ export default class Hands {
     // );
     // scene.add(controllerGrip1);
 
-    this.hand1 = renderer.xr.getHand(0);
+    this.hand1 = this.renderer.xr.getHand(0);
     this.hand1.add(handModelFactory.createHandModel(hand1));
 
     this.scene.add(hand1);
 
     // Hand 2
-    // controllerGrip2 = renderer.xr.getControllerGrip(1);
+    // controllerGrip2 = this.renderer.xr.getControllerGrip(1);
     // controllerGrip2.add(
     //   controllerModelFactory.createControllerModel(controllerGrip2)
     // );
     // scene.add(controllerGrip2);
 
-    this.hand2 = renderer.xr.getHand(1);
+    this.hand2 = this.renderer.xr.getHand(1);
     this.hand2.add(handModelFactory.createHandModel(hand2));
     this.scene.add(hand2);
   }
