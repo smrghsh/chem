@@ -61,22 +61,25 @@ export default class Experience {
       this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
       this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
     });
-    this.currentChemical = 0;
-    this.chemicalList = [
-      {
-        filename: "caffeine.pdb",
-        title: "Caffeine",
-      },
-      {
-        filename: "ethanol.pdb",
-        title: "Ethanol",
-      },
-    ];
-    this.chemicalList.forEach((e, i) => {
-      e.chemical = new Chemical(e.filename, e.title);
-      e.chemical.hide();
+
+    this.resources.on("ready", () => {
+      this.currentChemical = 0;
+      this.chemicalList = [
+        {
+          filename: "caffeine.pdb",
+          title: "Caffeine",
+        },
+        {
+          filename: "ethanol.pdb",
+          title: "Ethanol",
+        },
+      ];
+      this.chemicalList.forEach((e, i) => {
+        e.chemical = new Chemical(e.filename, e.title);
+        e.chemical.hide();
+      });
+      this.chemicalList[this.currentChemical].chemical.show();
     });
-    this.chemicalList[this.currentChemical].chemical.show();
 
     /** Debug
      *

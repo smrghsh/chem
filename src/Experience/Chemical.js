@@ -1,13 +1,50 @@
 import * as THREE from "three";
 import { PDBLoader } from "three/addons/loaders/PDBLoader.js";
 import Experience from "./Experience.js";
+// import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 
 export default class Chemical {
   constructor(filename, title, description, metadata) {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.font = this.resources.items.font;
+    console.log(this.resources.items);
+
     this.debug = this.experience.debug;
+
+    this.textParameters = {
+      size: 0.5,
+      height: 0.2, //depth of font
+      // depth: 0.1,
+      curveSegments: 5, //lower = easier for computer
+      bevelThickness: 0.03,
+      bevelSize: 0.02,
+      bevelOffset: 0,
+      bevelSegments: 3, //lower = easier for computer
+    };
+
+    this.textGeometry = new TextGeometry("Caffeine", {
+      font: this.font,
+      size: this.textParameters.size,
+      height: this.textParameters.height,
+      curveSegments: this.textParameters.curveSegments,
+      bevelEnabled: true,
+      bevelThickness: this.textParameters.bevelThickness,
+      bevelSize: this.textParameters.bevelSize,
+      bevelOffset: this.textParameters.bevelOffset,
+      bevelSegments: this.textParameters.bevelSegments,
+    });
+
+    // this.textGeometry.center(); //much simpler way than commented code above
+    this.text = new THREE.Mesh(
+      this.textGeometry,
+      new THREE.MeshBasicMaterial("white")
+    );
+    // this.text.scale.set(0.1, 0.1, 0.1);
+    this.scene.add(this.text);
+
     // console.log("leggo");
     // const MOLECULES = {
     //   Ethanol: "ethanol.pdb",
@@ -142,8 +179,10 @@ export default class Chemical {
   }
   hide() {
     this.root.visible = false;
+    // this.titleMesh.visible = false;
   }
   show() {
     this.root.visible = true;
+    // this.titleMesh.visible = true;
   }
 }
