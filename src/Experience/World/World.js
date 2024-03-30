@@ -3,7 +3,6 @@ import Experience from "../Experience.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
 import Stars from "./Stars.js";
-import Chemical from "./Chemical.js";
 
 export default class World {
   constructor() {
@@ -17,7 +16,7 @@ export default class World {
       // this.test = new Test()
       // this.stars = new Stars();
       this.scene.add(new THREE.AxesHelper());
-      this.chemical = new Chemical();
+
       // this.spectra = new Spectra()
       // this.sushi = new Sushi()
 

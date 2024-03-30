@@ -1,14 +1,14 @@
 import * as THREE from "three";
 import { PDBLoader } from "three/addons/loaders/PDBLoader.js";
-import Experience from "../Experience.js";
+import Experience from "./Experience.js";
 
 export default class Chemical {
-  constructor() {
+  constructor(filename, title, description, metadata) {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
-    console.log("leggo");
+    // console.log("leggo");
     // const MOLECULES = {
     //   Ethanol: "ethanol.pdb",
     //   Aspirin: "aspirin.pdb",
@@ -29,8 +29,15 @@ export default class Chemical {
     //   Graphite: "graphite.pdb",
     // };
     this.offset = new THREE.Vector3();
+
+    // this.root contains the 3D model
     this.root = new THREE.Group();
-    this.scene.add(this.root);
+    this.group = new THREE.Group();
+    this.group.add(this.root);
+    // add the title
+    // add the metadata
+    // add the description
+    this.scene.add(this.group);
     this.loader = new PDBLoader();
     // this.loader.load("models/chemicals/caffeine.pdb", (pdb) => {
     //   console.log("tryna load bruh");
@@ -39,7 +46,7 @@ export default class Chemical {
     // this.group.scale.set(0.1, 0.1, 0.1);
     //   this.scene.add(group);
     // });
-    this.loadMolecule("caffeine.pdb", this.root);
+    this.loadMolecule(filename, this.root);
   }
   loadMolecule(model) {
     const url = "models/chemicals/" + model;
@@ -85,7 +92,7 @@ export default class Chemical {
         object.position.copy(position);
         object.position.multiplyScalar(75);
         object.scale.multiplyScalar(25);
-        console.log(root);
+        // console.log(root);
         root.add(object);
 
         const atom = json.atoms[i];
@@ -131,6 +138,12 @@ export default class Chemical {
     });
     // make root super small
 
-    root.scale.set(0.01, 0.01, 0.01);
+    root.scale.set(0.001, 0.001, 0.001);
+  }
+  hide() {
+    this.root.visible = false;
+  }
+  show() {
+    this.root.visible = true;
   }
 }

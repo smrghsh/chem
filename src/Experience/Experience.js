@@ -9,6 +9,7 @@ import World from "./World/World.js";
 import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
+import Chemical from "./Chemical.js";
 
 let instance = null;
 
@@ -60,11 +61,45 @@ export default class Experience {
       this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
       this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
     });
+    this.currentChemical = 0;
+    this.chemicalList = [
+      {
+        filename: "caffeine.pdb",
+        title: "Caffeine",
+      },
+      {
+        filename: "ethanol.pdb",
+        title: "Ethanol",
+      },
+    ];
+    this.chemicalList.forEach((e, i) => {
+      e.chemical = new Chemical(e.filename, e.title);
+      e.chemical.hide();
+    });
+    this.chemicalList[this.currentChemical].chemical.show();
 
     /** Debug
      *
      */
     this.debug = new Debug();
+    // this.debug.active = true;
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("experience");
+      const debugObject = {
+        // sampleBoolean: this.sampleBoolean,
+        // sampleNumber: this.sampleNumber,
+        nextChemical: function () {
+          console.log("next Chemical");
+          window.experience.nextChemical();
+        },
+        previousChemical: function () {
+          console.log("previous Chemical");
+          window.experience.previousChemical();
+        },
+      };
+      this.debugFolder.add(debugObject, "nextChemical");
+      this.debugFolder.add(debugObject, "previousChemical");
+    }
 
     // window.addEventListener("click", () => {
     //   if (this.INTERSECTED) {
@@ -79,6 +114,28 @@ export default class Experience {
     // this.time.on("tick", () => {
     //   this.update();
     // });
+  }
+  nextChemical() {
+    this.currentChemical++;
+    // if this.currentChemical more than this.chemicalList.length, make it 0
+    if (this.currentChemical > this.chemicalList.length - 1) {
+      this.currentChemical = 0;
+    }
+    this.chemicalList.forEach((e) => {
+      e.chemical.hide();
+    });
+    this.chemicalList[this.currentChemical].chemical.show();
+  }
+  previousChemical() {
+    this.currentChemical--;
+    // if this.currentChemical more than this.chemicalList.length, make it 0
+    if (this.currentChemical < 0) {
+      this.currentChemical = this.chemicalList.length - 1;
+    }
+    this.chemicalList.forEach((e) => {
+      e.chemical.hide();
+    });
+    this.chemicalList[this.currentChemical].chemical.show();
   }
 
   resize() {
