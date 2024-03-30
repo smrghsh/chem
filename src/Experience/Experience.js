@@ -74,8 +74,8 @@ export default class Experience {
         {
           filename: "ethanol.pdb",
           title: "Ethanol",
-          description: "Ethanol is a clear, colourless \nliquid with a characteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
-          metadata: "ethanol is CH 3−CH 2−OH, which \nindicates that the carbon of a methyl \ngroup (CH3−) is attached to \ncarbon of a methylene group (−CH2–)"
+          description: "Ethanol is a clear, \ncolourless liquid with a \ncharacteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
+          metadata: "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)"
         },
       ];
       this.chemicalList.forEach((e, i) => {
