@@ -81,18 +81,18 @@ export default class Controllers {
 
     this.scene.add(this.hand1);
 
-    hand1.addEventListener("pinchin", function () {
+    this.hand1.addEventListener("pinchin", function () {
       this.debugCube.material.color = "blue";
     });
 
-    hand1.addEventListener("pinchend", function () {
+    this.hand1.addEventListener("pinchend", function () {
       this.debugCube.material.color = "green";
     });
-    hand2.addEventListener("pinchin", function () {
+    this.hand2.addEventListener("pinchin", function () {
       this.debugCube.material.color = "yellow";
     });
 
-    hand2.addEventListener("pinchend", function () {
+    this.hand2.addEventListener("pinchend", function () {
       this.debugCube.material.color = "purple";
     });
 
