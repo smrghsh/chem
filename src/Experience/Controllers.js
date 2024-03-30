@@ -26,11 +26,11 @@ export default class Controllers {
     this.hand1Pinching = false;
     this.hand2Pinching = false;
 
-    this.debugCube = new THREE.Mesh(
-      new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshBasicMaterial({ color: "red" })
-    );
-    this.scene.add(this.debugCube);
+    // this.debugCube = new THREE.Mesh(
+    //   new THREE.BoxGeometry(1, 1, 1),
+    //   new THREE.MeshBasicMaterial({ color: "red" })
+    // );
+    // this.scene.add(this.debugCube);
 
     // const onSelectStart = function (event) {};
     // this.controller1.addEventListener("selectstart", onSelectStart);

@@ -73,18 +73,35 @@ export default class Experience {
         {
           filename: "caffeine.pdb",
           title: "Caffeine",
-          description: "A drug that stimulates \nyour brain and nervous \nsystem. Caffeine is found in \nmany drinks such as \ncoffee, tea, soft drinks \nand energy drinks",
-          metadata: "Caffeine (1,3,7-trimethylxanthine) \nis a plant alkaloid with a chemical \nstructure of C8H10N4O2 and \na molecular weight of 194.19."
+          description:
+            "A drug that stimulates \nyour brain and nervous \nsystem. Caffeine is found in \nmany drinks such as \ncoffee, tea, soft drinks \nand energy drinks",
+          metadata:
+            "Caffeine (1,3,7-trimethylxanthine) \nis a plant alkaloid with a chemical \nstructure of C8H10N4O2 and \na molecular weight of 194.19.",
         },
         {
           filename: "ethanol.pdb",
           title: "Ethanol",
-          description: "Ethanol is a clear, \ncolourless liquid with a \ncharacteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
-          metadata: "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)"
+          description:
+            "Ethanol is a clear, \ncolourless liquid with a \ncharacteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
+          metadata:
+            "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)",
+        },
+        {
+          filename: "cholesterol.pdb",
+          title: "cholesterol",
+          description:
+            "Ethanol is a clear, \ncolourless liquid with a \ncharacteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
+          metadata:
+            "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)",
         },
       ];
       this.chemicalList.forEach((e, i) => {
-        e.chemical = new Chemical(e.filename, e.title, e.description, e.metadata);
+        e.chemical = new Chemical(
+          e.filename,
+          e.title,
+          e.description,
+          e.metadata
+        );
         e.chemical.hide();
       });
       this.chemicalList[this.currentChemical].chemical.show();
