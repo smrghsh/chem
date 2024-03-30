@@ -1,0 +1,120 @@
+import * as THREE from "three";
+import Debug from "./Utils/Debug.js";
+import Sizes from "./Utils/Sizes.js";
+// import Time from "./Utils/Time.js";
+import Resources from "./Utils/Resources.js";
+import Camera from "./Camera.js";
+import Renderer from "./Renderer.js";
+import World from "./World/World.js";
+import sources from "./sources.js";
+import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
+import Controllers from "./Controllers.js";
+
+let instance = null;
+
+export default class Experience {
+  constructor(canvas) {
+    if (instance) {
+      return instance;
+    }
+    instance = this;
+    // Global access
+    window.experience = this;
+
+    // if query parameter mobile = true, nextVideo()
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const mobile = urlParams.get("mobile");
+    // log
+    console.log("mobile: " + mobile);
+    this.mobileVersion = mobile == "true" ? true : false;
+    //log
+
+    this.canvas = canvas;
+
+    this.sizes = new Sizes();
+
+    // this.time = new Time();
+    this.scene = new THREE.Scene();
+    this.clock = new THREE.Clock();
+    this.clock.start();
+    this.resources = new Resources(sources);
+    this.world = new World();
+    this.camera = new Camera();
+    this.renderer = new Renderer();
+
+    this.renderer.instance.xr.enabled = true;
+    document.body.appendChild(VRButton.createButton(this.renderer.instance));
+
+    this.renderer.instance.setAnimationLoop(() => {
+      // tick();
+      this.world.update();
+      this.controllers.update();
+      this.renderer.instance.render(this.scene, this.camera.instance);
+    });
+
+    this.controllers = new Controllers();
+
+    this.mouse = new THREE.Vector2();
+    window.addEventListener("mousemove", (event) => {
+      this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
+      this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
+    });
+
+    /** Debug
+     *
+     */
+    this.debug = new Debug();
+
+    // window.addEventListener("click", () => {
+    //   if (this.INTERSECTED) {
+    //     // do something here if there is something in this.INTERSECTED
+    //   }
+    // });
+    this.sizes.on("resize", () => {
+      this.resize();
+      this.camera.resize();
+      this.renderer.resize();
+    });
+    // this.time.on("tick", () => {
+    //   this.update();
+    // });
+  }
+
+  resize() {
+    console.log("resized occured");
+    this.camera.resize();
+  }
+  update() {
+    this.camera.update();
+    this.controllers.update();
+    this.world.update();
+  }
+  destroy() {
+    this.sizes.off("resize");
+    this.time.off("tick");
+
+    // Traverse the whole scene
+    this.scene.traverse((child) => {
+      // Test if it's a mesh
+      if (child instanceof THREE.Mesh) {
+        child.geometry.dispose();
+
+        // Loop through the material properties
+        for (const key in child.material) {
+          const value = child.material[key];
+
+          // Test if there is a dispose function
+          if (value && typeof value.dispose === "function") {
+            value.dispose();
+          }
+        }
+      }
+    });
+    this.camera.controls.dispose();
+    this.renderer.instance.dispose();
+    if (this.debug.active) {
+      this.debug.ui.destroy();
+    }
+  }
+}

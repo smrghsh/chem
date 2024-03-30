@@ -1,0 +1,45 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+/* html,
+body
+{
+    overflow: hidden;
+} */
+
+.webgl
+{
+    /* position: fixed; */
+    /* top: 0;
+    left: 0; */
+    outline: none;
+    position: absolute ;
+    z-index: 0;
+}
+#settings {
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+    /* margin: .1em 0; */
+    padding: 0 0;
+    z-index: 1;
+    
+}
+#settings > button {
+    background-color: grey;
+    opacity: 0.7;
+    /* drop shadow */
+    box-shadow: 0 0 0.5em black;
+
+    padding:  0.1em 0.3em;
+    /* rounded corners */
+    
+    /* width: 100px; */
+    border-radius: 20px;
+    font-size: 4em;
+    margin: 10px;
+    color: white;
+}
