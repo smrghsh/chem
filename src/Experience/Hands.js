@@ -1,4 +1,6 @@
 // import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
+import * as THREE from "three";
+import Experience from "./Experience.js";
 import { XRHandModelFactory } from "three/addons/webxr/XRHandModelFactory.js";
 
 export default class Hands {
