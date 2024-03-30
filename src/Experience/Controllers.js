@@ -23,6 +23,9 @@ export default class Controllers {
     this.lastLeftTriggerPressed = false;
     this.lastRightTriggerPressed = false;
 
+    this.hand1Pinching = false;
+    this.hand2Pinching = false;
+
     this.debugCube = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1),
       new THREE.MeshBasicMaterial({ color: "red" })
@@ -86,14 +89,18 @@ export default class Controllers {
     // });
 
     this.hand1.addEventListener("pinchend", function () {
-      this.debugCube.material.color = "green";
+      window.experience.controllers.debugCube.material.color = "green";
+      window.experience.controllers.hand1Pinching = false;
+      window.experience.controllers.hand2Pinching = false;
     });
     // this.hand2.addEventListener("pinchin", function () {
     //   this.debugCube.material.color = "yellow";
     // });
 
     this.hand2.addEventListener("pinchend", function () {
-      this.debugCube.material.color = "purple";
+      window.experience.controllers.debugCube.material.color = "purple";
+      window.experience.controllers.hand1Pinching = false;
+      window.experience.controllers.hand2Pinching = false;
     });
 
     this.hand2 = this.renderer.instance.xr.getHand(1);
