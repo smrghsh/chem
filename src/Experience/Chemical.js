@@ -10,14 +10,14 @@ export default class Chemical {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.font = this.resources.items.font;
-    console.log(this.resources.items);
+    // console.log(this.resources.items);
 
     this.debug = this.experience.debug;
 
     this.textParameters = {
       size: 0.5,
-      height: 0.2, //depth of font
-      // depth: 0.01,
+      // height: 0.2, //depth of font
+      depth: 0.2,
       curveSegments: 5, //lower = easier for computer
       bevelThickness: 0.03,
       bevelSize: 0.02,
@@ -28,7 +28,7 @@ export default class Chemical {
     this.titleGeometry = new TextGeometry(title, {
       font: this.font,
       size: this.textParameters.size,
-      height: this.textParameters.height,
+      depth: this.textParameters.depth,
       // depth: this.textParameters.depth,
       curveSegments: this.textParameters.curveSegments,
       bevelEnabled: true,

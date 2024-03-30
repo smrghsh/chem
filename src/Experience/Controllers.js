@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
+import { XRHandModelFactory } from "three/addons/webxr/XRHandModelFactory.js";
 
 export default class Controllers {
   constructor() {
@@ -65,6 +66,17 @@ export default class Controllers {
       this.controllerModelFactory.createControllerModel(this.controllerGrip2)
     );
     this.scene.add(this.controllerGrip2);
+
+    this.handModelFactory = new XRHandModelFactory();
+
+    this.hand1 = this.renderer.instance.xr.getHand(0);
+    this.hand1.add(this.handModelFactory.createHandModel(this.hand1));
+
+    this.scene.add(this.hand1);
+
+    this.hand2 = this.renderer.instance.xr.getHand(1);
+    this.hand2.add(this.handModelFactory.createHandModel(this.hand2));
+    this.scene.add(this.hand2);
   }
 
   setInstance() {}

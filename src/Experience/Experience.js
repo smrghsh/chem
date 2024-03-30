@@ -55,8 +55,8 @@ export default class Experience {
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
 
-    // this.controllers = new Controllers();
-    this.hands = new Hands();
+    this.controllers = new Controllers();
+    // this.hands = new Hands();
 
     this.mouse = new THREE.Vector2();
     window.addEventListener("mousemove", (event) => {
