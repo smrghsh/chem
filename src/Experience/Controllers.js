@@ -67,15 +67,16 @@ export default class Controllers {
     );
     this.scene.add(this.controllerGrip2);
 
+    // hands
     this.handModelFactory = new XRHandModelFactory();
 
     this.hand1 = this.renderer.instance.xr.getHand(0);
-    this.hand1.add(this.handModelFactory.createHandModel(this.hand1));
+    this.hand1.add(this.handModelFactory.createHandModel(this.hand1, "mesh"));
 
     this.scene.add(this.hand1);
 
     this.hand2 = this.renderer.instance.xr.getHand(1);
-    this.hand2.add(this.handModelFactory.createHandModel(this.hand2));
+    this.hand2.add(this.handModelFactory.createHandModel(this.hand2, "mesh"));
     this.scene.add(this.hand2);
   }
 
