@@ -33,6 +33,7 @@ export default class Chemical {
       metadataBevelSize: 0.001,
     };
 
+
     // title
     this.titleGeometry = new TextGeometry(title, {
       font: this.font,
@@ -51,7 +52,7 @@ export default class Chemical {
     // this.textGeometry.center(); //much simpler way than commented code above
     this.titleMesh = new THREE.Mesh(this.titleGeometry, this.textMaterial);
     this.titleMesh.scale.set(1.0, 1.0, 0.3);
-    this.titleMesh.position.set(-1, 1.6, 0.5);
+    this.titleMesh.position.set(-0.8, 1.6, -1);
     this.scene.add(this.titleMesh);
     this.offset = new THREE.Vector3();
 
@@ -72,7 +73,7 @@ export default class Chemical {
 
     this.descMesh = new THREE.Mesh(this.descGeometry, this.textMaterial);
     this.descMesh.scale.set(1.0, 1.0, 0.3);
-    this.descMesh.position.set(1.8, 1.5, 0.8);
+    this.descMesh.position.set(1.8, 1.5, -0.8);
     this.scene.add(this.descMesh);
     this.offset = new THREE.Vector3();
 
@@ -93,14 +94,14 @@ export default class Chemical {
 
     this.metadataMesh = new THREE.Mesh(this.metadataGeometry, this.textMaterial);
     this.metadataMesh.scale.set(1.0, 1.0, 0.3);
-    this.metadataMesh.position.set(-0.9, 1.3, 0.9);
+    this.metadataMesh.position.set(-2.3, 1.3, -0.9);
     this.scene.add(this.metadataMesh);
     this.offset = new THREE.Vector3();
 
     // this.root contains the 3D model
     this.root = new THREE.Group();
     this.group = new THREE.Group();
-    this.root.position.set(1, 1, 1);
+    this.root.position.set(0, 1, -0.5);
     this.group.add(this.root);
     // add the title
     // add the metadata
