@@ -46,7 +46,11 @@ export default class Experience {
     this.renderer = new Renderer();
 
     this.renderer.instance.xr.enabled = true;
-    document.body.appendChild(VRButton.createButton(this.renderer.instance));
+    document.body.appendChild(
+      VRButton.createButton(this.renderer.instance, {
+        requiredFeatures: ["hand-tracking"],
+      })
+    );
 
     this.renderer.instance.setAnimationLoop(() => {
       // tick();
