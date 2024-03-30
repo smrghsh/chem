@@ -88,6 +88,10 @@ export default class Controllers {
     //   this.debugCube.material.color = "blue";
     // });
 
+    this.hand2 = this.renderer.instance.xr.getHand(1);
+    this.hand2.add(this.handModelFactory.createHandModel(this.hand2, "mesh"));
+    this.scene.add(this.hand2);
+
     this.hand1.addEventListener("pinchend", function () {
       window.experience.controllers.debugCube.material.color = "green";
       window.experience.controllers.hand1Pinching = false;
@@ -102,10 +106,6 @@ export default class Controllers {
       window.experience.controllers.hand1Pinching = false;
       window.experience.controllers.hand2Pinching = false;
     });
-
-    this.hand2 = this.renderer.instance.xr.getHand(1);
-    this.hand2.add(this.handModelFactory.createHandModel(this.hand2, "mesh"));
-    this.scene.add(this.hand2);
   }
 
   setInstance() {}
