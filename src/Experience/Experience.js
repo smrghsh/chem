@@ -9,6 +9,7 @@ import World from "./World/World.js";
 import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
+import Hands from "./Hands.js";
 import Chemical from "./Chemical.js";
 
 let instance = null;
@@ -55,6 +56,7 @@ export default class Experience {
     });
 
     this.controllers = new Controllers();
+    this.hands = new Hands();
 
     this.mouse = new THREE.Vector2();
     window.addEventListener("mousemove", (event) => {
