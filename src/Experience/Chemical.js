@@ -17,7 +17,7 @@ export default class Chemical {
     this.textParameters = {
       size: 0.5,
       height: 0.2, //depth of font
-      // depth: 0.1,
+      // depth: 0.01,
       curveSegments: 5, //lower = easier for computer
       bevelThickness: 0.03,
       bevelSize: 0.02,
@@ -25,10 +25,11 @@ export default class Chemical {
       bevelSegments: 3, //lower = easier for computer
     };
 
-    this.textGeometry = new TextGeometry("Caffeine", {
+    this.titleGeometry = new TextGeometry(title, {
       font: this.font,
       size: this.textParameters.size,
       height: this.textParameters.height,
+      // depth: this.textParameters.depth,
       curveSegments: this.textParameters.curveSegments,
       bevelEnabled: true,
       bevelThickness: this.textParameters.bevelThickness,
@@ -36,53 +37,25 @@ export default class Chemical {
       bevelOffset: this.textParameters.bevelOffset,
       bevelSegments: this.textParameters.bevelSegments,
     });
+    this.textMaterial = new THREE.MeshBasicMaterial("white");
 
     // this.textGeometry.center(); //much simpler way than commented code above
-    this.text = new THREE.Mesh(
-      this.textGeometry,
-      new THREE.MeshBasicMaterial("white")
-    );
-    // this.text.scale.set(0.1, 0.1, 0.1);
-    this.scene.add(this.text);
-
-    // console.log("leggo");
-    // const MOLECULES = {
-    //   Ethanol: "ethanol.pdb",
-    //   Aspirin: "aspirin.pdb",
-    //   Caffeine: "caffeine.pdb",
-    //   Nicotine: "nicotine.pdb",
-    //   LSD: "lsd.pdb",
-    //   Cocaine: "cocaine.pdb",
-    //   Cholesterol: "cholesterol.pdb",
-    //   Lycopene: "lycopene.pdb",
-    //   Glucose: "glucose.pdb",
-    //   "Aluminium oxide": "Al2O3.pdb",
-    //   Cubane: "cubane.pdb",
-    //   Copper: "cu.pdb",
-    //   Fluorite: "caf2.pdb",
-    //   Salt: "nacl.pdb",
-    //   "YBCO superconductor": "ybco.pdb",
-    //   Buckyball: "buckyball.pdb",
-    //   Graphite: "graphite.pdb",
-    // };
+    this.titleMesh = new THREE.Mesh(this.titleGeometry, this.textMaterial);
+    this.titleMesh.scale.set(1.0, 1.0, 0.1);
+    this.titleMesh.position.set(0.0, 0.0, 0.0);
+    this.scene.add(this.titleMesh);
     this.offset = new THREE.Vector3();
 
     // this.root contains the 3D model
     this.root = new THREE.Group();
     this.group = new THREE.Group();
+    this.root.position.set(1, 1, 1);
     this.group.add(this.root);
     // add the title
     // add the metadata
     // add the description
     this.scene.add(this.group);
     this.loader = new PDBLoader();
-    // this.loader.load("models/chemicals/caffeine.pdb", (pdb) => {
-    //   console.log("tryna load bruh");
-    //   console.log(pdb);
-    //   //   let group = pdb;
-    // this.group.scale.set(0.1, 0.1, 0.1);
-    //   this.scene.add(group);
-    // });
     this.loadMolecule(filename, this.root);
   }
   loadMolecule(model) {
@@ -179,10 +152,10 @@ export default class Chemical {
   }
   hide() {
     this.root.visible = false;
-    // this.titleMesh.visible = false;
+    this.titleMesh.visible = false;
   }
   show() {
     this.root.visible = true;
-    // this.titleMesh.visible = true;
+    this.titleMesh.visible = true;
   }
 }
