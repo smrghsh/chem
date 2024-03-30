@@ -23,6 +23,12 @@ export default class Controllers {
     this.lastLeftTriggerPressed = false;
     this.lastRightTriggerPressed = false;
 
+    this.debugCube = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshBasicMaterial({ color: "red" })
+    );
+    this.scene.add(this.debugCube);
+
     // const onSelectStart = function (event) {};
     // this.controller1.addEventListener("selectstart", onSelectStart);
     // this.controller2.addEventListener("selectstart", onSelectStart);
@@ -74,6 +80,21 @@ export default class Controllers {
     this.hand1.add(this.handModelFactory.createHandModel(this.hand1, "mesh"));
 
     this.scene.add(this.hand1);
+
+    hand1.addEventListener("pinchin", function () {
+      this.debugCube.material.color = "blue";
+    });
+
+    hand1.addEventListener("pinchend", function () {
+      this.debugCube.material.color = "green";
+    });
+    hand2.addEventListener("pinchin", function () {
+      this.debugCube.material.color = "yellow";
+    });
+
+    hand2.addEventListener("pinchend", function () {
+      this.debugCube.material.color = "purple";
+    });
 
     this.hand2 = this.renderer.instance.xr.getHand(1);
     this.hand2.add(this.handModelFactory.createHandModel(this.hand2, "mesh"));
