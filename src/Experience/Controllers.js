@@ -2,7 +2,6 @@ import * as THREE from "three";
 import Experience from "./Experience.js";
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
 import { XRHandModelFactory } from "three/addons/webxr/XRHandModelFactory.js";
-
 export default class Controllers {
   constructor() {
     this.experience = new Experience();
@@ -92,25 +91,25 @@ export default class Controllers {
     this.hand2.add(this.handModelFactory.createHandModel(this.hand2, "mesh"));
     this.scene.add(this.hand2);
 
-    this.menu = new Menu();
-    this.menu.group.attach(this.hand2);
-
     this.debugAxes = new THREE.AxesHelper(1);
     this.scene.add(this.debugAxes);
 
     this.hand1.addEventListener("pinchend", function () {
-      window.experience.controllers.debugCube.material.color = "green";
-      window.experience.controllers.hand1Pinching = false;
-      window.experience.controllers.hand2Pinching = false;
+      // window.experience.controllers.debugCube.material.color = "green";
+      // window.experience.controllers.hand1Pinching = false;
+      // window.experience.controllers.hand2Pinching = false;
+      window.experience.nextCategory();
     });
-    // this.hand2.addEventListener("pinchin", function () {
-    //   this.debugCube.material.color = "yellow";
-    // });
+    // // this.hand2.addEventListener("pinchin", function () {
+    // //   this.debugCube.material.color = "yellow";
+    // // });
 
     this.hand2.addEventListener("pinchend", function () {
-      window.experience.controllers.debugCube.material.color = "purple";
-      window.experience.controllers.hand1Pinching = false;
-      window.experience.controllers.hand2Pinching = false;
+      // window.experience.controllers.debugCube.material.color = "purple";
+      // window.experience.controllers.hand1Pinching = false;
+      // window.experience.controllers.hand2Pinching = false;
+      // this.hand2;
+      window.experience.nextChemical();
     });
   }
 
@@ -120,10 +119,6 @@ export default class Controllers {
 
   update() {
     try {
-      if (this.hand2) {
-        // make axes helper have the applyMatrix of hand2
-        this.debugAxes.applyMatrix4(this.hand2.matrixWorld);
-      }
       // Right Controller
       if (this.controller2.gamepad) {
         // A Button

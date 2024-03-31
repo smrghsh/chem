@@ -55,7 +55,7 @@ export default class Experience {
     this.renderer.instance.setAnimationLoop(() => {
       // tick();
       this.world.update();
-      // this.controllers.update();
+      this.controllers.update();
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
 
@@ -146,7 +146,12 @@ export default class Experience {
     //   this.update();
     // });
   }
+  nextCategory() {
+    console.log("next category");
+    this.currentChemical = 0;
+  }
   nextChemical() {
+    console.log("next chemical");
     this.currentChemical++;
     // if this.currentChemical more than this.chemicalList.length, make it 0
     if (this.currentChemical > this.chemicalList.length - 1) {
