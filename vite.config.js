@@ -1,5 +1,5 @@
 import glsl from "vite-plugin-glsl";
-import basicSsl from "@vitejs/plugin-basic-ssl";
+// import basicSsl from "@vitejs/plugin-basic-ssl";
 
 const isCodeSandbox =
   "SANDBOX_URL" in process.env || "CODESANDBOX_HOST" in process.env;
@@ -30,5 +30,6 @@ export default {
       },
     ],
   },
-  plugins: [glsl(), basicSsl()],
+  // plugins: [glsl(), basicSsl()],
+  plugins: [glsl()],
 };
