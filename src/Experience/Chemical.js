@@ -98,7 +98,7 @@ export default class Chemical {
     // this.textMaterial = new THREE.MeshBasicMaterial({ color: "blue" });
 
     this.descMesh = new THREE.Mesh(this.descGeometry, this.textMaterial);
-    this.descMesh.scale.set(0.5, 0.5, 0.1);
+    this.descMesh.scale.set(0.21, 0.21, 0.05);
     this.descMesh.position.set(0, 0.6, -1.3);
     this.descMesh.lookAt(new THREE.Vector3(0, 1.5, 0));
     this.scene.add(this.descMesh);
