@@ -1,6 +1,5 @@
-# chem
+# Chem Reality
 
-[chem-ei0.pages.dev](chem-ei0.pages.dev)
+[https://smrghsh.github.io/chem/](https://smrghsh.github.io/chem/)
 
-
-[[branch-name].chem-ei0.pages.dev]([branch-name].chem-ei0.pages.dev)
+Chem Reality is a WebXR app for exploring the 3D structure of chemicals!
