@@ -56,12 +56,19 @@ export default class Chemical {
       );
     }
 
-    this.textMaterial = new THREE.MeshBasicMaterial({ color: "white" });
+    // this.textMaterial = new THREE.MeshBasicMaterial({ color: "white" });
+    // this.textMaterial = new THREE.MeshMatcapMaterial({})
+    this.textMaterial = new THREE.MeshMatcapMaterial();
+    // this.textMaterial = new THREE.MeshLambertMaterial();
+
+    this.textMaterial.color = new THREE.Color(0xffffff);
+    this.textMaterial.side = THREE.DoubleSide;
+    this.textMaterial.matcap = this.resources.items.matcapTexture2;
 
     // this.textGeometry.center(); //much simpler way than commented code above
     this.titleMesh = new THREE.Mesh(this.titleGeometry, this.textMaterial);
-    this.titleMesh.scale.set(0.5, 0.5, 0.3);
-    this.titleMesh.position.set(0, 1.6, -1.3);
+    this.titleMesh.scale.set(0.3, 0.3, 0.1);
+    this.titleMesh.position.set(0, 2, -1.3);
     this.scene.add(this.titleMesh);
     this.offset = new THREE.Vector3();
 
@@ -92,7 +99,7 @@ export default class Chemical {
 
     this.descMesh = new THREE.Mesh(this.descGeometry, this.textMaterial);
     this.descMesh.scale.set(0.5, 0.5, 0.1);
-    this.descMesh.position.set(1.3, 1.5, -0.8);
+    this.descMesh.position.set(0, 0.6, -1.3);
     this.descMesh.lookAt(new THREE.Vector3(0, 1.5, 0));
     this.scene.add(this.descMesh);
     this.offset = new THREE.Vector3();
@@ -123,8 +130,8 @@ export default class Chemical {
       this.metadataGeometry,
       this.textMaterial
     );
-    this.metadataMesh.scale.set(0.5, 0.5, 0.1);
-    this.metadataMesh.position.set(-1.3, 1.5, -0.8);
+    this.metadataMesh.scale.set(1.2, 1.2, 0.1);
+    this.metadataMesh.position.set(0, 1.8, -1.3);
     this.metadataMesh.lookAt(new THREE.Vector3(0, 1.5, 0));
     this.scene.add(this.metadataMesh);
     this.offset = new THREE.Vector3();
@@ -132,7 +139,7 @@ export default class Chemical {
     // this.root contains the 3D model
     this.root = new THREE.Group();
     this.group = new THREE.Group();
-    this.root.position.set(0, 1, -0.5);
+    this.root.position.set(0, 1.2, -0.5);
     this.group.add(this.root);
     // add the title
     // add the metadata

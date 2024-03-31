@@ -15,7 +15,7 @@ export default class World {
       console.log("resources ready");
       // this.test = new Test()
       // this.stars = new Stars();
-      this.scene.add(new THREE.AxesHelper());
+      // this.scene.add(new THREE.AxesHelper());
 
       // this.spectra = new Spectra()
       // this.sushi = new Sushi()

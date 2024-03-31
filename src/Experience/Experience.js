@@ -80,10 +80,25 @@ export default class Experience {
             const regex = new RegExp(`.{1,${n}}`, "g");
             return str.match(regex).join("\n");
           }
+          function addNewlineWithoutSplittingWords(str, n) {
+            let result = "";
+            let lineLength = 0;
+
+            str.split(" ").forEach((word) => {
+              if (lineLength + word.length + 1 > n) {
+                result += "\n";
+                lineLength = 0;
+              }
+              result += (lineLength > 0 ? " " : "") + word;
+              lineLength += word.length + 1; // +1 for the space
+            });
+
+            return result;
+          }
           e.chemical = new Chemical(
             e.filename,
             e.name,
-            addNewlineEveryNChars(e.description, 50),
+            addNewlineWithoutSplittingWords(e.description, 60),
             e.formula
           );
           e.chemical.hide();

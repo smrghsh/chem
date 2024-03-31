@@ -91,8 +91,8 @@ export default class Controllers {
     this.hand2.add(this.handModelFactory.createHandModel(this.hand2, "mesh"));
     this.scene.add(this.hand2);
 
-    this.debugAxes = new THREE.AxesHelper(1);
-    this.scene.add(this.debugAxes);
+    // this.debugAxes = new THREE.AxesHelper(1);
+    // this.scene.add(this.debugAxes);
 
     this.hand1.addEventListener("pinchend", function () {
       // window.experience.controllers.debugCube.material.color = "green";
