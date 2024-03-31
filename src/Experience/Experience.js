@@ -145,13 +145,13 @@ export default class Experience {
           console.log("next Chemical");
           window.experience.nextChemical();
         },
-        nextCategory: function () {
-          console.log("previous Chemical");
-          window.experience.nextCategory();
-        },
+        // nextCategory: function () {
+        //   console.log("previous Chemical");
+        //   window.experience.nextCategory();
+        // },
       };
       this.debugFolder.add(debugObject, "nextChemical");
-      this.debugFolder.add(debugObject, "nextCategory");
+      // this.debugFolder.add(debugObject, "nextCategory");
     }
 
     // window.addEventListener("click", () => {
