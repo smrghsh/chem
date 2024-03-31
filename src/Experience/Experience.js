@@ -10,6 +10,7 @@ import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
 import Chemical from "./Chemical.js";
+import ChemicalManifest from "./ChemicalManifest.js";
 
 let instance = null;
 
@@ -95,6 +96,7 @@ export default class Experience {
             "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)",
         },
       ];
+      console.log(ChemicalManifest);
       this.chemicalList.forEach((e, i) => {
         e.chemical = new Chemical(
           e.filename,
