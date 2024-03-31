@@ -26,6 +26,7 @@ export default class Experience {
     // if query parameter mobile = true, nextVideo()
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    this.queryChemical = urlParams.get("chemical");
     const mobile = urlParams.get("mobile");
     // log
     console.log("mobile: " + mobile);
@@ -106,6 +107,18 @@ export default class Experience {
       });
       this.chemicalList =
         this.chemicalManifest[this.categories[this.currentCategory]];
+
+      // Function to find the index of an object with name 'chemical'
+      function findChemicalIndex(array, queryChemical) {
+        // Use findIndex to find the index of the object with name 'chemical'
+        const index = array.findIndex((obj) => obj.name === queryChemical);
+
+        // If index is -1 (not found), return 0, otherwise return the found index
+        return index === -1 ? 0 : index;
+      }
+      this.currentChemical = this.queryChemical
+        ? findChemicalIndex(this.chemicalList, this.queryChemical)
+        : 0;
       // this.chemicalList.forEach((e, i) => {
       //   e.chemical = new Chemical(
       //     e.filename,
