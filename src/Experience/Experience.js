@@ -71,7 +71,7 @@ export default class Experience {
 
     this.resources.on("ready", () => {
       this.currentChemical = 0;
-      this.categories = ["Alkanes", "Alkenes", "Alcohols"];
+      this.categories = ["Other"];
       this.currentCategory = 0;
 
       this.categories.forEach((category, i) => {
