@@ -44,6 +44,7 @@ export default class Experience {
     this.world = new World();
     this.camera = new Camera();
     this.renderer = new Renderer();
+    this.chemicalManifest = ChemicalManifest;
 
     this.renderer.instance.xr.enabled = true;
     document.body.appendChild(
@@ -70,42 +71,35 @@ export default class Experience {
 
     this.resources.on("ready", () => {
       this.currentChemical = 0;
-      this.chemicalList = [
-        {
-          filename: "caffeine.pdb",
-          title: "Caffeine",
-          description:
-            "A drug that stimulates \nyour brain and nervous \nsystem. Caffeine is found in \nmany drinks such as \ncoffee, tea, soft drinks \nand energy drinks",
-          metadata:
-            "Caffeine (1,3,7-trimethylxanthine) \nis a plant alkaloid with a chemical \nstructure of C8H10N4O2 and \na molecular weight of 194.19.",
-        },
-        {
-          filename: "ethanol.pdb",
-          title: "Ethanol",
-          description:
-            "Ethanol is a clear, \ncolourless liquid with a \ncharacteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
-          metadata:
-            "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)",
-        },
-        {
-          filename: "cholesterol.pdb",
-          title: "cholesterol",
-          description:
-            "Ethanol is a clear, \ncolourless liquid with a \ncharacteristic pleasant \nodour and burning taste.\nIt is highly flammable.",
-          metadata:
-            "ethanol is CH 3−CH 2−OH, \nwhich indicates that the carbon\n of a methyl group (CH3−) \nis attached to carbon of \na methylene group (−CH2–)",
-        },
-      ];
-      console.log(ChemicalManifest);
-      this.chemicalList.forEach((e, i) => {
-        e.chemical = new Chemical(
-          e.filename,
-          e.title,
-          e.description,
-          e.metadata
-        );
-        e.chemical.hide();
+      this.categories = ["Alkanes", "Alkenes", "Alcohols"];
+      this.currentCategory = 0;
+
+      this.categories.forEach((category, i) => {
+        this.chemicalManifest[category].forEach((e, i) => {
+          function addNewlineEveryNChars(str, n) {
+            const regex = new RegExp(`.{1,${n}}`, "g");
+            return str.match(regex).join("\n");
+          }
+          e.chemical = new Chemical(
+            e.filename,
+            e.name,
+            addNewlineEveryNChars(e.description, 50),
+            e.formula
+          );
+          e.chemical.hide();
+        });
       });
+      this.chemicalList =
+        this.chemicalManifest[this.categories[this.currentCategory]];
+      // this.chemicalList.forEach((e, i) => {
+      //   e.chemical = new Chemical(
+      //     e.filename,
+      //     e.title,
+      //     e.description,
+      //     e.metadata
+      //   );
+      //   e.chemical.hide();
+      // });
       this.chemicalList[this.currentChemical].chemical.show();
     });
 
@@ -123,13 +117,13 @@ export default class Experience {
           console.log("next Chemical");
           window.experience.nextChemical();
         },
-        previousChemical: function () {
+        nextCategory: function () {
           console.log("previous Chemical");
-          window.experience.previousChemical();
+          window.experience.nextCategory();
         },
       };
       this.debugFolder.add(debugObject, "nextChemical");
-      this.debugFolder.add(debugObject, "previousChemical");
+      this.debugFolder.add(debugObject, "nextCategory");
     }
 
     // window.addEventListener("click", () => {
@@ -148,6 +142,16 @@ export default class Experience {
   }
   nextCategory() {
     console.log("next category");
+    this.chemicalList.forEach((e) => {
+      e.chemical.hide();
+    });
+    this.currentCategory++;
+    if (this.currentCategory > this.categories.length - 1) {
+      this.currentCategory = 0;
+    }
+    this.chemicalList =
+      this.chemicalManifest[this.categories[this.currentCategory]];
+    this.chemicalList[this.currentChemical].chemical.show();
     this.currentChemical = 0;
   }
   nextChemical() {
